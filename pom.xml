@@ -26,8 +26,8 @@
 
     <url>https://github.com/ozimov/spring-boot-email-tools</url>
     <scm>
-        <connection>scm:git:ssh://git@github.com:pramoth/spring-boot-email-tools.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:pramoth/spring-boot-email-tools.git</developerConnection>
+        <connection>scm:git:git@github.com:pramoth/spring-boot-email-tools.git</connection>
+        <developerConnection>scm:git:git@github.com:pramoth/spring-boot-email-tools.git</developerConnection>
         <url>https://github.com/pramoth/spring-boot-email-tools</url>
         <tag>HEAD</tag>
     </scm>
