@@ -7,13 +7,13 @@
     <parent>
         <groupId>it.ozimov</groupId>
         <artifactId>spring-boot-email-build</artifactId>
-        <version>0.6.4-SNAPSHOT</version>
+        <version>3.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>it.ozimov</groupId>
     <artifactId>spring-boot-email-core</artifactId>
-    <version>0.6.4-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Spring Boot Email Core</name>
@@ -40,9 +40,9 @@
 
         <!-- Validation -->
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>5.3.3.Final</version>
+            <version>8.0.0.Final</version>
         </dependency>
 
         <!-- Spring Redis -->

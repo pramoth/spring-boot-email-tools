@@ -16,14 +16,14 @@
 
 package it.ozimov.springboot.mail;
 
-import org.springframework.util.SocketUtils;
+import org.springframework.test.util.TestSocketUtils;
 
 import java.io.IOException;
 
 public class PortUtils {
 
     public static int randomFreePort() throws IOException {
-        return SocketUtils.findAvailableTcpPort();
+        return TestSocketUtils.findAvailableTcpPort();
     }
 
 }

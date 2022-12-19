@@ -21,7 +21,7 @@ import lombok.*;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import static it.ozimov.springboot.mail.configuration.ApplicationPropertiesConstants.__SPRING_MAIL_SCHEDULER;
 import static java.util.Objects.isNull;
@@ -38,9 +38,11 @@ public class EmailSchedulerProperties {
     private boolean enabled;
 
     // spring.mail.scheduler.priorityLevels
+    @Builder.Default
     private Integer priorityLevels = 10;
 
     // spring.mail.scheduler.persistence.*
+    @Builder.Default
     private Persistence persistence = new Persistence();
 
     @Builder
@@ -50,12 +52,15 @@ public class EmailSchedulerProperties {
     public static class Persistence {
 
         // spring.mail.scheduler.persistence.desiredBatchSize
+        @Builder.Default
         private int desiredBatchSize = 500;
 
         // spring.mail.scheduler.persistence.minKeptInMemory
+        @Builder.Default
         private int minKeptInMemory = 250;
 
         // spring.mail.scheduler.persistence.maxKeptInMemory
+        @Builder.Default
         private int maxKeptInMemory = 2000;
 
     }

@@ -23,7 +23,7 @@ import it.ozimov.springboot.mail.model.Email;
 import it.ozimov.springboot.mail.model.EmailAttachment;
 import lombok.*;
 
-import javax.mail.internet.InternetAddress;
+import jakarta.mail.internet.InternetAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Date;
@@ -63,6 +63,7 @@ public class DefaultEmail implements Email {
     @Singular
     private Collection<EmailAttachment> attachments;
 
+    @Builder.Default
     private String encoding = StandardCharsets.UTF_8.name();
 
     private Locale locale;

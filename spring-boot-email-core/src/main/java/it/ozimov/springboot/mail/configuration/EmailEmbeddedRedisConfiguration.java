@@ -16,16 +16,16 @@
 
 package it.ozimov.springboot.mail.configuration;
 
+import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import redis.clients.jedis.JedisShardInfo;
 
-import javax.annotation.PreDestroy;
 import java.util.List;
 
 import static it.ozimov.springboot.mail.configuration.ApplicationPropertiesConstants.SPRING_MAIL_SCHEDULER_PERSISTENCE_REDIS_PORT;
@@ -51,10 +51,8 @@ public class EmailEmbeddedRedisConfiguration {
         emailEmbeddedRedis =
                 new EmailEmbeddedRedis(redisPort, redisSettings.stream().map(s -> s.trim()).collect(toSet()))
                         .start();
-
-        JedisShardInfo shardInfo = new JedisShardInfo("localhost", redisPort);
-        connectionFactory = new JedisConnectionFactory();
-        connectionFactory.setShardInfo(shardInfo);
+        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration("localhost", redisPort);
+        connectionFactory = new JedisConnectionFactory(redisStandaloneConfiguration);
         connectionFactory.setUsePool(true);
         connectionFactory.getPoolConfig().setMaxTotal(10_000);
     }

@@ -29,7 +29,6 @@ import java.util.Map;
 
 
 @Getter
-@EqualsAndHashCode(of = {"id", "scheduledDateTime", "assignedPriority", "desiredPriority"})
 public class TemplateEmailSchedulingData extends DefaultEmailSchedulingData {
 
     private static final long serialVersionUID = -8267649519235191875L;

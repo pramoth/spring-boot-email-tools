@@ -29,6 +29,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -39,7 +40,6 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.transaction.AfterTransaction;
 import org.springframework.test.context.transaction.BeforeTransaction;
 import org.springframework.test.util.ReflectionTestUtils;
-import redis.clients.jedis.JedisShardInfo;
 import redis.embedded.RedisServer;
 
 import javax.sql.DataSource;
@@ -146,9 +146,8 @@ public abstract class BaseRedisTest implements ContextBasedTest {
 
             redisServer = (RedisServer) ReflectionTestUtils.getField(emailEmbeddedRedis, "redisServer");
 
-            JedisShardInfo shardInfo = new JedisShardInfo("localhost", redisPort);
-            connectionFactory = new JedisConnectionFactory();
-            connectionFactory.setShardInfo(shardInfo);
+            RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration("localhost", redisPort);
+            connectionFactory = new JedisConnectionFactory(redisStandaloneConfiguration);
             connectionFactory.setUsePool(true);
             connectionFactory.getPoolConfig().setMaxTotal(10_000);
         }
