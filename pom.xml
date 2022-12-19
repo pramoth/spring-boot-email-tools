@@ -26,9 +26,10 @@
 
     <url>https://github.com/ozimov/spring-boot-email-tools</url>
     <scm>
-        <connection>scm:git:git@github.com:ozimov/spring-boot-email-tools.git</connection>
-        <developerConnection>scm:git:git@github.com:ozimov/spring-boot-email-tools.git</developerConnection>
-        <url>https://github.com/ozimov/spring-boot-email-tools</url>
+        <connection>scm:git:ssh://git@github.com:pramoth/spring-boot-email-tools.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:pramoth/spring-boot-email-tools.git</developerConnection>
+        <url>https://github.com/pramoth/spring-boot-email-tools</url>
+        <tag>HEAD</tag>
     </scm>
     <issueManagement>
         <system>GitHub Issue Tracking</system>
@@ -84,7 +85,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>21.0</version>
+            <version>31.1-jre</version>
         </dependency>
 
         <!--  Boilerplate code killer  -->
@@ -185,14 +186,14 @@
     </prerequisites>
 
     <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>Geniustree Release</id>
+            <url>https://nexus.geniustree.io/repository/maven-releases/</url>
         </repository>
+        <snapshotRepository>
+            <id>Geniustree Snapshots</id>
+            <url>https://nexus.geniustree.io/repository/maven-snapshots/</url>
+        </snapshotRepository>
     </distributionManagement>
     <build>
         <resources>
@@ -272,70 +273,17 @@
                     <showWarnings>true</showWarnings>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.4.0</version>
+                <configuration>
+                    <additionalJOption>-Xdoclint:none</additionalJOption>
+                    <show>private</show>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>3.0.1</version>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
-                                <goals>
-                                    <goal>jar-no-fork</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.4.1</version>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.7</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <serverId>ossrh</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
     <reporting>
         <plugins>
             <plugin>
